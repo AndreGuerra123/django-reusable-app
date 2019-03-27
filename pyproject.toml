@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "django-reusable-app"
+version = "0.1.0"
+description = "A cookiecutter template to package Django Reusable Apps."
+authors = ["AndreGuerra123 <guerraandre@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/AndreGuerra123/django-reusable-app"
+repository = "https://github.com/AndreGuerra123/django-reusable-app"
+keywords= "django-reusable-app"
+
+[tool.poetry.dependencies]
+python = "*"
+cookiecutter = "*"
+
+[tool.poetry.dev-dependencies]
+django = "*"
+tox = "*"
+pytest-cookies = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
