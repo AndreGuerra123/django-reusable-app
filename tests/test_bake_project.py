@@ -121,7 +121,7 @@ def test_readme(cookies):
     assert 'pip install {}'.format(full_context['repo_name']) in readme_lines
     assert "'{}',".format(full_context['app_name']) in readme_lines
     assert 'import {}'.format(full_context['app_name']) in readme_lines
-    assert "path('/{}', include({}.urls)),".format(full_context['app_name'],full_context['app_name']) in readme_lines
+    assert "url(r'^', include({}.urls)),".format(full_context['app_name'],full_context['app_name']) in readme_lines
 
 def test_authors(cookies):
     result = cookies.bake(extra_context=full_context)
@@ -167,15 +167,15 @@ def test_tox(cookies):
     """
     Test case to assert that the tox configuration file has the basic template
     """
-    result = cookies.bake(extra_context={'repo_name': 'dj-pack','app_name':'dj_app'})
+    result = cookies.bake(extra_context=full_context)
     tox_config_file = result.project.join('tox.ini')
     tox_config_lines = [x.strip() for x in tox_config_file.readlines(cr=False)]
     required = ["skipsdist = True",
        "{py27}-django{109,110,111}",
        "{py340,py35,py36,py370}-django{111,20,21}",
-       "whitelist_externals = poetry, django",
+       "whitelist_externals = poetry",
        "skip_install = true",
-       "poetry run coverage run --branch runtests.py",
+       "poetry run coverage run --source {} runtests.py".format(full_context['app_name']),
        "django109: Django<=1.9",
        "django110: Django>=1.10,<1.11",
        "django111: Django>=1.11,<2.0",
@@ -188,8 +188,27 @@ def test_poetry(cookies):
     result = cookies.bake(extra_context=full_context)
     poetry_file = result.project.join('pyproject.toml')
     poetry_text = poetry_file.read()
-    #TODO:
-
+    required =['name = "{}"'.format(full_context['repo_name']),
+            'version = "{}"'.format(full_context['version']),
+            'description = "{}"'.format(full_context['project_short_description']),
+            'authors = ["{} <{}>"]'.format(full_context['full_name'],full_context['email']),
+            'license = "{}"'.format(full_context['open_source_license']),
+            'readme = "README.rst"',
+            'homepage = "https://github.com/{}/{}"'.format(full_context['github_username'],full_context['repo_name']),
+            'repository = "https://github.com/{}/{}"'.format(full_context['github_username'],full_context['repo_name']),
+            'documentation = "https://{}.readthedocs.io"'.format(full_context['repo_name']),
+            'keywords= "{}"'.format(full_context['repo_name']),
+            'python = "*"',
+            'django = "*"',
+            'coverage = "*"',
+            'tox = "*"',
+            'codecov = "*"',
+            'sphinx = "*"',
+            'flake8 = "*"']
+            
+    for req in required:
+            assert req in poetry_text
+    
 # Test app files
 def test_app_url(cookies):
     """
@@ -198,7 +217,7 @@ def test_app_url(cookies):
     result = cookies.bake(extra_context=full_context)
     urls_file_txt = result.project.join(full_context['app_name'], 'urls.py').read()
     assert "app_name = \'{}\'".format(full_context['app_name']) in urls_file_txt
-    assert "url(r'', TemplateView.as_view(template_name='base.html'))" in urls_file_txt
+    assert "url(r'^', TemplateView.as_view(template_name='base.html'))" in urls_file_txt
 
 def test_app_config(cookies):
     """
@@ -302,7 +321,7 @@ def test_test_settings(cookies):
    """check if test project should have correct test settings"""
    result = cookies.bake(extra_context=full_context)
    test_settings_txt = result.project.join('tests', 'settings.py').read()
-   assert "\"{}\",".format(full_context['app_name']) in test_settings_txt
+   assert '"{}.apps.{}",'.format(full_context['app_name'],full_context['app_config_name']) in test_settings_txt
     
 def test_test_urls(cookies):
    """check if test project should have correct test url.py"""
