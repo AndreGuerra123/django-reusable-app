@@ -191,7 +191,6 @@ def test_poetry(cookies):
     #TODO:
 
 # Test app files
-
 def test_app_url(cookies):
     """
     Test case to assert that the urls.py file has the basic template

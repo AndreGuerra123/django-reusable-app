@@ -46,8 +46,8 @@ Ready to contribute? Here's how to set up [django-reusable-app](https://github.c
 
 2. Clone your fork locally::
     ```
-    cd YOUR_REPO_PATH
-    git clone git@github.com:YOUR_NAME/django-reusable-app.git
+    git clone git@github.com:YOUR_GITHUB_USERNAME/django-reusable-app.git
+    cd django-reusable-app
     ```
 
 3. Before you run testing or developing you should ensure all dependancies are installed using [Poetry](https://github.com/sdispater/poetry):

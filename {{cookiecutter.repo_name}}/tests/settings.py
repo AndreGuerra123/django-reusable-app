@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sites",
-    "{{ cookiecutter.app_name }}",
+    "{{ cookiecutter.app_name }}.apps.{{cookiecutter.app_config_name}}",
 ]
 
 SITE_ID = 1

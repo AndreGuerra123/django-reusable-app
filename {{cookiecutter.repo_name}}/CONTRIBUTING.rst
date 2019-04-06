@@ -61,10 +61,10 @@ Ready to contribute? Here's how to set up `{{ cookiecutter.repo_name }}` for loc
 2. Clone your fork locally::
 
     $ git clone git@github.com:your_name_here/{{ cookiecutter.repo_name }}.git
+    $ cd {{ cookiecutter.repo_name }}/
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
-    $ cd {{ cookiecutter.repo_name }}/
     $ poetry install
     $ poetry shell
 

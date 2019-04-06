@@ -3,7 +3,7 @@ version: 2
 jobs:
   development:
     docker:
-      - image: circleci/python:3.6.8
+      - image: circleci/python:3.7.2
 
     steps:
       - checkout
@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Documentation
           command: |
-	          poetry run sphinx-apidoc -o docs/ {{ cookiecutter.app_name }} --force
+            poetry run sphinx-apidoc -o docs/ {{ cookiecutter.app_name }} --force
       - run:
          name: Report
          command: |
@@ -30,7 +30,7 @@ jobs:
 
   deployment:
       docker:
-        - image: circleci/python:3.6.8
+        - image: circleci/python:3.7.2
 
       steps:
         - checkout

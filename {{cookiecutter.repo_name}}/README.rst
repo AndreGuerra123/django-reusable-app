@@ -2,14 +2,24 @@
 {{ cookiecutter.project_name }}
 =============================
 
-.. image:: https://badge.fury.io/py/{{ cookiecutter.repo_name }}.svg
-    :target: https://badge.fury.io/py/{{ cookiecutter.repo_name }}
-
 .. image:: https://circleci.com/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}.svg?style=svg
     :target: https://circleci.com/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
 
 .. image:: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
+
+.. image:: https://readthedocs.org/projects/{{ cookiecutter.repo_name }}/badge/?version=latest
+    :target: https://{{ cookiecutter.repo_name }}.readthedocs.io/en/latest/?badge=latest
+
+.. image:: https://img.shields.io/pypi/pyversions/envision.svg
+
+.. image:: https://img.shields.org//pypi/pyversions//{{cookiecutter.repo_name}}.svg
+
+.. image:: https://img.shields.io/pypi/djversions/{{cookiecutter.repo_name}}.svg
+
+.. image:: https://img.shields.io/pypi/djversions/{{cookiecutter.repo_name}}.svg
+
+.. image:: https://img.shields.io//pypi/wheel/{{cookiecutter.repo_name}}.svg
 
 {{ cookiecutter.project_short_description}}
 
@@ -43,7 +53,7 @@ Add {{ cookiecutter.project_name }}'s URL patterns:
 
     urlpatterns = [
         ...
-        path('/{{ cookiecutter.app_name }}', include({{ cookiecutter.app_name }}.urls)),
+        url(r'^', include({{ cookiecutter.app_name }}.urls)),
         ...
     ]
 
